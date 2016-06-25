@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-settings = ""
+settings = {}
 
 
 @app.route("/")
