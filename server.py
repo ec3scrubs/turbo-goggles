@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-settings = {}
+google_api_key = ""
 
 
 @app.route("/")
@@ -44,7 +44,7 @@ def find_route():
 
 
 def get_time(start, dest):
-    api_key = settings['keys']['google_api']
+    api_key = google_api_key
     req = "https://maps.googleapis.com/maps/api/directions/json?"
     req += "origin=" + start.location
     req += "&destination=" + dest.google_location
@@ -64,7 +64,7 @@ class Destination:
         self.get_location()
 
     def get_location(self):
-        api_key = settings['keys']['google_api']
+        api_key = google_api_key
 
         req = "https://maps.googleapis.com/maps/api/place/autocomplete/json?"
         req += "key=" + api_key + "&input=" + self.location
@@ -93,6 +93,6 @@ if __name__ == "__main__":
     #     settings = json.load(config)
 
     # Environmental variable for deployment
-    settings['keys']['google_api'] = os.environ['GOOGLE_API']
+    google_api_key = os.environ['GOOGLE_API']
 
     app.run()
