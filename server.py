@@ -1,8 +1,11 @@
 from flask import Flask
 import json
 import requests
+import os
 
 app = Flask(__name__)
+
+settings = ""
 
 
 @app.route("/")
@@ -45,7 +48,7 @@ def get_time(start, dest):
     resp = json.loads(r.text)
     dest.google_location = resp[1]['a']
 
-    api_key = "AIzaSyDwQagrpe0UCbH3s1p5eLDDCVLYvMJ59gc"
+    api_key = settings['keys']['google_api']
     req = "https://maps.googleapis.com/maps/api/directions/json?"
     req += "origin=" + start.location
     req += "&destination=" + dest.google_location
@@ -71,4 +74,11 @@ class Source:
 
 
 if __name__ == "__main__":
+    # Load the configuration
+    __location__ = os.path.realpath(
+        os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+    with open(os.path.join(__location__, 'config.json'), 'r') as config:
+        settings = json.load(config)
+
     app.run()
