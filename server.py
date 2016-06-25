@@ -20,7 +20,7 @@ def find_route():
         "Junction 8",
         "Plaza Singapura",
         "Nex",
-        "JEM",
+        "jem 50 jurong gateway",
         "Star Vista",
         "Causeway Point",
         "AMK Hub"
@@ -34,20 +34,12 @@ def find_route():
             get_time(s, d)
 
     for d in dest:
-        print d.location, d.time
+        print d.location, d.google_location, d.time
 
     return "hello"
 
 
 def get_time(start, dest):
-    de_req = "http://www.streetdirectory.com/api/?mode=search&act=all"
-    de_req += "&profile=sd_mobile&country=sg&q=" + dest.location
-    de_req += "&output=json&start=0&limit=1"
-
-    r = requests.get(de_req)
-    resp = json.loads(r.text)
-    dest.google_location = resp[1]['a']
-
     api_key = settings['keys']['google_api']
     req = "https://maps.googleapis.com/maps/api/directions/json?"
     req += "origin=" + start.location
@@ -64,8 +56,19 @@ def get_time(start, dest):
 class Destination:
     def __init__(self, loc):
         self.location = loc
-        self.google_location = ""
         self.time = 0
+        self.google_location = ""
+        self.get_location()
+
+    def get_location(self):
+        api_key = settings['keys']['google_api']
+
+        req = "https://maps.googleapis.com/maps/api/place/autocomplete/json?"
+        req += "key=" + api_key + "&input=" + self.location
+
+        r = requests.get(req)
+        resp = json.loads(r.text)
+        self.google_location = resp['predictions'][0]['description']
 
 
 class Source:
