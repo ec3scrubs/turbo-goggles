@@ -85,11 +85,14 @@ class Source:
 
 
 if __name__ == "__main__":
-    # Load the configuration
-    __location__ = os.path.realpath(
-        os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    # Load the configuration (local)
+    # __location__ = os.path.realpath(
+    #     os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    #
+    # with open(os.path.join(__location__, 'config.json'), 'r') as config:
+    #     settings = json.load(config)
 
-    with open(os.path.join(__location__, 'config.json'), 'r') as config:
-        settings = json.load(config)
+    # Environmental variable for deployment
+    settings['keys']['google_api'] = os.environ['GOOGLE_API']
 
     app.run()
