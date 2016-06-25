@@ -16,6 +16,7 @@ def hello():
 @app.route("/findroute")
 def find_route():
     start_list = ["567987", "730157", "596195", "348271"]
+    weight = [1, 2, 1, 2]
     dest_list = [
         "Junction 8",
         "Plaza Singapura",
@@ -26,17 +27,20 @@ def find_route():
         "AMK Hub"
     ]
 
-    start = [Source(x) for x in start_list]
+    start = [Source(x, y) for x, y in zip(start_list, weight)]
     dest = [Destination(x) for x in dest_list]
 
     for s in start:
         for d in dest:
             get_time(s, d)
 
-    for d in dest:
-        print d.location, d.google_location, d.time
+    result = sorted(dest, key=lambda x: x.time)
 
-    return "hello"
+    output = {"result": []}
+    for d in result:
+        output["result"].append(d.jsonify())
+
+    return json.dumps(output)
 
 
 def get_time(start, dest):
@@ -49,8 +53,7 @@ def get_time(start, dest):
     r = requests.get(req)
     resp = json.loads(r.text)
     time = resp['routes'][0]['legs'][0]['duration']['value']
-    dest.time += int(time) / 60
-    print start.location, dest.location, time / 60
+    dest.time += (int(time) / 60) * start.weight
 
 
 class Destination:
@@ -70,10 +73,15 @@ class Destination:
         resp = json.loads(r.text)
         self.google_location = resp['predictions'][0]['description']
 
+    def jsonify(self):
+        output = {"location": self.location, "time taken": self.time}
+        return output
+
 
 class Source:
-    def __init__(self, loc):
+    def __init__(self, loc, weight):
         self.location = loc
+        self.weight = weight
 
 
 if __name__ == "__main__":

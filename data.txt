@@ -1,24 +1,35 @@
-567987 579837 42
-567987 238839 55
-567987 608549 80
-567987 738099 57
-567987 556083 58
-567987 138617 65
-730157 579837 38
-730157 238839 50
-730157 608549 32
-730157 738099 14
-730157 556083 50
-730157 138617 47
-596195 579837 45
-596195 238839 41
-596195 608549 42
-596195 738099 60
-596195 556083 50
-596195 138617 56
-348271 579837 32
-348271 238839 20
-348271 608549 51
-348271 738099 59
-348271 556083 14
-348271 138617 46
+567987 Junction 8 33
+567987 Plaza Singapura 73
+567987 Nex 58
+567987 jem 50 jurong gateway 80
+567987 Star Vista 70
+567987 Causeway Point 68
+567987 AMK Hub 47
+730157 Junction 8 94
+730157 Plaza Singapura 112
+730157 Nex 98
+730157 jem 50 jurong gateway 64
+730157 Star Vista 118
+730157 Causeway Point 34
+730157 AMK Hub 84
+596195 Junction 8 65
+596195 Plaza Singapura 51
+596195 Nex 49
+596195 jem 50 jurong gateway 42
+596195 Star Vista 49
+596195 Causeway Point 56
+596195 AMK Hub 45
+348271 Junction 8 64
+348271 Plaza Singapura 68
+348271 Nex 26
+348271 jem 50 jurong gateway 102
+348271 Star Vista 102
+348271 Causeway Point 140
+348271 AMK Hub 58
+Junction 8 Junction 8 Bishan Place Singapore 42
+Plaza Singapura Plaza Singapura Singapore 50
+Nex NEX Serangoon Central Singapore 38
+jem 50 jurong gateway YOSHINOYA (Jem) 50 Jurong Gateway Road Singapore 48
+Star Vista The Star Vista Singapore 56
+Causeway Point Courts Causeway Point Singapore 49
+AMK Hub AMK Hub Singapore 39
